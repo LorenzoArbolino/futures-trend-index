@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local data: the raw download cache and the SQLite database are rebuilt from
+# scratch by `python run.py fetch`, so they do not belong in version control.
+# (output/ is kept: the report and research notes are the deliverables.)
+data/cache/
+data/*.sqlite
+data/*.sqlite-journal
+
