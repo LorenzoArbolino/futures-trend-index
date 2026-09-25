@@ -200,13 +200,13 @@ Weekly rebalancing mainly improves risk: a shallower worst drawdown and steadier
 
 ## 7. Practitioner views
 
-**After fees.** The index is reported before any management fee; as a fund:
+**After fees.** The index is reported before any management fee. With a flat annual fee (no performance fee):
 
-| Fees | Annual return | Sharpe | Worst drawdown |
+| Management fee | Annual return | Sharpe | Worst drawdown |
 |---|---|---|---|
-| No fees | 16.2% | 0.89 | -22.7% |
-| 1% management, 10% performance | 13.6% | 0.74 | -27.6% |
-| 2% management, 20% performance | 11.2% | 0.60 | -32.0% |
+| No fee | 16.2% | 0.89 | -22.7% |
+| 1% a year | 15.0% | 0.82 | -26.9% |
+| 2% a year | 13.9% | 0.76 | -31.0% |
 
 **Leverage and margin.** Positions target 15% ex-ante volatility with gross notional capped at 8x. Estimated exchange margin (bonds 2%, currencies 4%, commodities 8% of notional) uses a median 16% of capital, 24% at the 95th percentile, 32% at most.
 

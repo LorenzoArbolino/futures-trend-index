@@ -118,7 +118,8 @@ None of this is market timing: the rules are identical in every period.
 - **Implementation.**
   - Monthly rebalancing at the signal close.
   - Estimated exchange margin is typically about 15% of capital, peaking near 30%.
-  - Results are before fees. At 2/20 the Sharpe ratio falls to about 0.6.
+  - Results are before fees. A flat management fee of 1% or 2% a year lowers the Sharpe ratio
+    to about 0.82 or 0.76.
 
 ## Data
 

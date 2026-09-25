@@ -515,8 +515,8 @@ def cmd_research(n_sims=200, draws=200):
     print("7/9 practitioner views ...")
     pr = R.practitioner(ctx)
     L += ["## 7. Practitioner views", "",
-          "**After fees.** The index is reported before any management fee; as a fund:", "",
-          "| Fees | Annual return | Sharpe | Worst drawdown |", "|---|---|---|---|"]
+          "**After fees.** The index is reported before any management fee. With a flat annual fee (no performance fee):", "",
+          "| Management fee | Annual return | Sharpe | Worst drawdown |", "|---|---|---|---|"]
     for r in pr["fees"]:
         L.append(f"| {r['label']} | {pc(r['cagr'])} | {f2(r['sharpe'])} | {pc(r['maxdd'])} |")
     L += ["", f"**Leverage and margin.** Positions target 15% ex-ante volatility with gross notional "

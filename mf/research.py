@@ -451,23 +451,11 @@ def stacking(ctx):
 # ---------------------------------------------------------------------------
 # 7. Practitioner views
 # ---------------------------------------------------------------------------
-def apply_fees(months, total, rates, mgmt, perf):
-    """Monthly fund NAV returns after a management fee (accrued monthly on NAV)
-    and a performance fee on gains above the high-water mark, crystallised each
-    December. Returns net total returns."""
-    nav, hwm, year_start_nav, net = 1.0, 1.0, 1.0, []
-    accrued = 0.0
-    for m, r in zip(months, total):
-        gross_nav = nav * (1 + r) * (1 - mgmt / 12)
-        new_nav = gross_nav
-        if m[5:7] == "12":
-            gain = gross_nav - max(hwm, 0.0)
-            fee = perf * gain if gain > 0 else 0.0
-            new_nav = gross_nav - fee
-            hwm = max(hwm, new_nav)
-        net.append(new_nav / nav - 1)
-        nav = new_nav
-    return net
+def apply_fees(total, mgmt):
+    """Monthly net total returns after an annual management fee accrued monthly
+    on NAV. No performance fee: for a rules-based index on liquid public
+    markets, a flat fee is the relevant cost."""
+    return [(1 + r) * (1 - mgmt / 12) - 1 for r in total]
 
 
 def practitioner(ctx):
@@ -478,9 +466,8 @@ def practitioner(ctx):
     prev = dict(zip(ctx["months"][1:], ctx["months"]))
     rf = [(1 + ctx["rates"][prev[m]] / 100) ** (1 / 12) - 1 for m in ms]
     out = {"fees": []}
-    for lab, mg, pf in (("No fees", 0.0, 0.0), ("1% management, 10% performance", 0.01, 0.10),
-                        ("2% management, 20% performance", 0.02, 0.20)):
-        net = apply_fees(ms, total, ctx["rates"], mg, pf)
+    for lab, mg in (("No fee", 0.0), ("1% a year", 0.01), ("2% a year", 0.02)):
+        net = apply_fees(total, mg)
         ex = [n - r for n, r in zip(net, rf)]
         out["fees"].append({"label": lab, "cagr": metrics.cagr(net),
                             "sharpe": metrics.sharpe(ex), "maxdd": metrics.max_drawdown(net)[0]})

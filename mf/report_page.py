@@ -351,7 +351,7 @@ def build():
         prev_sel = sel
     sel_tbl = ch.table(["Review", "Markets", "Joined", "Left"], uni_rows,
                        "Only reviews where the membership changed are shown.")
-    fee_tbl = ch.table(["Fees", "Annual return", "Sharpe", "Worst drawdown"],
+    fee_tbl = ch.table(["Management fee", "Annual return", "Sharpe", "Worst drawdown"],
                        [[r["label"], ch.fmt_p(r["cagr"], 1), ch.fmt_x(r["sharpe"]),
                          ch.fmt_p(r["maxdd"], 1)] for r in pr["fees"]])
     dec_tbl = ch.table(["Decade", "Realised volatility", "Sharpe", "Median gross exposure",
@@ -478,9 +478,10 @@ little below the historical best, because that best is estimated from one histor
 {st_tbl}
 
 <h2>Costs, fees and risks</h2>
-<p>The figures above are after trading and roll costs but before any management fee. As a fund
-charging 2% a year plus 20% of gains, the Sharpe ratio would have been
-{ch.fmt_x(pr['fees'][2]['sharpe'])} and the annual return {ch.fmt_p(pr['fees'][2]['cagr'], 1)}.
+<p>The figures above are after trading and roll costs but before any management fee. With a
+flat fee of 1% a year the Sharpe ratio would have been {ch.fmt_x(pr['fees'][1]['sharpe'])}
+(annual return {ch.fmt_p(pr['fees'][1]['cagr'], 1)}); at 2% a year,
+{ch.fmt_x(pr['fees'][2]['sharpe'])} ({ch.fmt_p(pr['fees'][2]['cagr'], 1)}).
 Estimated exchange margin uses a median {ch.fmt_p(pr['margin']['median'], 0)} of capital
 ({ch.fmt_p(pr['margin']['max'], 0)} at most). Profit is concentrated: Japan (the yen and JGBs)
 contributed {ch.fmt_p(pr['japan_share'], 0)}, and without those two markets the Sharpe ratio is
